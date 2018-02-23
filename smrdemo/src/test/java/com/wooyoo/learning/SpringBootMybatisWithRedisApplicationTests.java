@@ -33,20 +33,30 @@ public class SpringBootMybatisWithRedisApplicationTests {
         long productId = 1;
         Product product = restTemplate.getForObject("http://localhost:" + port + "/product/" + productId, Product.class);
 
-        try {
-            assertThat(product.getPrice()).isEqualTo(Long.valueOf("3746955919608290903"));
+      /*  try {
+            assertThat(product.getPrice()).isEqualTo(Long.valueOf("4871135969545044666"));
         } catch (Exception e) {
-            e.printStackTrace();
-        }
+        }*/
 
-        Product newProduct = new Product();
+        Product insertProduct = new Product();
+        long insertPrice = new Random().nextLong();
+        insertProduct.setName("new name");
+        insertProduct.setPrice(insertPrice);
+        System.out.println("-------------------------insert-------------------------");
+        restTemplate.put("http://localhost:" + port + "/product/insert/" + 1, insertProduct);
+
+
+
+
+        /*Product newProduct = new Product();
         long newPrice = new Random().nextLong();
         newProduct.setName("new name");
         newProduct.setPrice(newPrice);
-        System.out.println("-------------------------"+newPrice);
+        System.out.println("-------------------------"+newPrice+"-------------------------");
+        System.out.println("-------------------------update-------------------------");
         restTemplate.put("http://localhost:" + port + "/product/" + productId, newProduct);
 
         Product testProduct = restTemplate.getForObject("http://localhost:" + port + "/product/" + productId, Product.class);
-        assertThat(testProduct.getPrice()).isEqualTo(newPrice);
+        assertThat(testProduct.getPrice()).isEqualTo(newPrice);*/
     }
 }

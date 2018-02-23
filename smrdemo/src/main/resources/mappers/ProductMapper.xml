@@ -14,4 +14,10 @@
     <update id="update" parameterType="Product" flushCache="true">
         UPDATE products SET name = #{name}, price = #{price} WHERE id = #{id} LIMIT 1
     </update>
+
+    <insert id="insert" parameterType="Product" >
+        INSERT INTO products (name, price)
+        VALUES
+	    (#{name}, #{price})
+    </insert>
 </mapper>

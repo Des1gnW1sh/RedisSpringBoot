@@ -38,4 +38,15 @@ public class ProductController {
         productMapper.update(product);
         return product;
     }
+
+    @PutMapping("/insert/{id}")
+    public Product insertProductInfo(
+            @PathVariable("id")
+                    Long productId,
+            @RequestBody
+                    Product newProduct) {
+        productMapper.insert(newProduct);
+        return newProduct;
+    }
+
 }
