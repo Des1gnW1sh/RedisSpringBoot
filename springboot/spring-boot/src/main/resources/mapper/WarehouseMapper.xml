@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.boot.example.dao.WarehouseMapper" >
+	
+	<!-- 实体类和数据库表名对应 -->
+	<resultMap id="BaseResultMap" type="com.boot.example.entity.Warehouse">
+		<id column="ID" property="id" />
+		<result column="WAREHOUSE_CODE" property="warehouseCode" />
+		<result column="WAREHOUSE_NAME" property="warehouseName" />
+		<result column="MASTER_ID" property="masterId" />
+		<result column="MASTER_NAME" property="masterName" />
+		<result column="WAREHOUSE_TYPE" property="warehouseType" />
+		<result column="PROVINCE_ID" property="provinceId" />
+		<result column="PROVINCE_NAME" property="provinceName" />
+		<result column="CITY_ID" property="cityId" />
+		<result column="CITY_NAME" property="cityName" />
+		<result column="COUNTY_ID" property="countyId" />
+		<result column="COUNTY_NAME" property="countyName" />
+		<result column="STREET_ID" property="streetId" />
+		<result column="STREET_NAME" property="streetName" />
+		<result column="WAREHOUSE_ADDRESS" property="warehouseAddress" />
+		<result column="WAREHOUSE_NEGATIVE" property="warehouseNegative" />
+		<result column="DISTRIBUTOR_ID" property="distributorId" />
+		<result column="STORE_ID" property="storeId" />
+		<result column="STORE_CODE" property="storeCode" />
+		<result column="IS_FROZEN" property="isFrozen"/>
+		<result column="DEL_STATUS" property="delStatus"/>
+	</resultMap>
+
+ 	<select id="getList" resultMap="BaseResultMap">
+ 		select * from T_BSC_WAREHOUSE where DEL_STATUS = 0 order by CREATE_TIME desc
+ 	</select>
+ 	
+ 	<select id="getById" parameterType="java.lang.String" resultMap="BaseResultMap">
+ 		select * from T_BSC_WAREHOUSE where id = #{id} and DEL_STATUS = 0
+ 	</select> 
+ 	
+ 	<update id="update" parameterType="com.boot.example.entity.Warehouse">
+ 		update T_BSC_WAREHOUSE set DEL_STATUS = #{warehouse.delStatus} where id = #{warehouse.id}
+ 	</update>
+ 	
+ 	
+ 	
+</mapper>

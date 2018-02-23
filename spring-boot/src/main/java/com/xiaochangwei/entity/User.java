@@ -5,11 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @since 2017年2月7日 下午2:17:42
- * @author 肖昌伟 317409898@qq.com
- * @description
- */
 public class User implements Serializable {
 	private static final long serialVersionUID = 4167869185651158701L;
 

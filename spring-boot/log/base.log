@@ -36,3 +36,42 @@
 2018-02-23 17:44:31,214 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: INSERT INTO users (`name`,pwd,salt) values (?,?,?) 
 2018-02-23 17:44:31,238 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: nimei(String), 123(String), 333(String)
 2018-02-23 17:44:31,277 DEBUG (BaseJdbcLogger.java:181)- <==    Updates: 1
+2018-02-23 20:53:45,165 INFO (StartupInfoLogger.java:48)- Starting Application on Des1gn-PC with PID 5728 (F:\Des1gn\working\work\learngit\RedisSpringBoot\spring-boot\target\classes started by Des1gn in F:\Des1gn\working\work\learngit\RedisSpringBoot\spring-boot)
+2018-02-23 20:53:45,168 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-02-23 20:53:45,168 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2018-02-23 20:55:16,056 INFO (StartupInfoLogger.java:48)- Starting Application on Des1gn-PC with PID 7044 (F:\Des1gn\working\work\learngit\RedisSpringBoot\spring-boot\target\classes started by Des1gn in F:\Des1gn\working\work\learngit\RedisSpringBoot\spring-boot)
+2018-02-23 20:55:16,060 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-02-23 20:55:16,061 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2018-02-23 20:55:22,473 INFO (StartupInfoLogger.java:57)- Started Application in 6.778 seconds (JVM running for 8.029)
+2018-02-23 21:19:38,810 INFO (StartupInfoLogger.java:48)- Starting Application on Des1gn-PC with PID 1432 (F:\Des1gn\working\work\learngit\RedisSpringBoot\spring-boot\target\classes started by Des1gn in F:\Des1gn\working\work\learngit\RedisSpringBoot\spring-boot)
+2018-02-23 21:19:38,825 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-02-23 21:19:38,826 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2018-02-23 21:19:48,271 INFO (StartupInfoLogger.java:57)- Started Application in 9.993 seconds (JVM running for 13.983)
+2018-02-23 21:22:37,607 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2018-02-23 21:22:37,637 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2018-02-23 21:22:37,663 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =1 
+2018-02-23 21:22:37,663 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2018-02-23 21:22:37,666 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2018-02-23 21:22:37,667 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =2 
+2018-02-23 21:22:37,668 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2018-02-23 21:22:37,669 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 1
+2018-02-23 21:22:37,670 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2018-02-23 21:23:59,749 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2018-02-23 21:23:59,750 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2018-02-23 21:23:59,750 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =1 
+2018-02-23 21:23:59,750 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2018-02-23 21:23:59,752 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2018-02-23 21:23:59,753 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =2 
+2018-02-23 21:23:59,754 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2018-02-23 21:23:59,755 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 1
+2018-02-23 21:23:59,755 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2018-02-23 21:32:51,658 DEBUG (UserController.java:77)- 访问set:key=123,value=123
+2018-02-23 21:33:07,867 DEBUG (UserController.java:84)- 访问get:key=123
+2018-02-23 21:35:40,287 DEBUG (UserController.java:77)- 访问set:key=333,value=123
+2018-02-23 22:20:20,765 INFO (StartupInfoLogger.java:48)- Starting Application on Des1gn-PC with PID 2604 (F:\Des1gn\working\work\learngit\RedisSpringBoot\spring-boot\target\classes started by Des1gn in F:\Des1gn\working\work\learngit\RedisSpringBoot\spring-boot)
+2018-02-23 22:20:20,769 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-02-23 22:20:20,769 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2018-02-23 22:21:32,729 INFO (StartupInfoLogger.java:48)- Starting Application on Des1gn-PC with PID 7028 (F:\Des1gn\working\work\learngit\RedisSpringBoot\spring-boot\target\classes started by Des1gn in F:\Des1gn\working\work\learngit\RedisSpringBoot\spring-boot)
+2018-02-23 22:21:32,734 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-02-23 22:21:32,735 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2018-02-23 22:21:39,119 INFO (StartupInfoLogger.java:57)- Started Application in 6.753 seconds (JVM running for 8.095)
