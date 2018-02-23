@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaochangwei.mapper.PhotoMapper">
+	
+	<resultMap type="photo" id="photoMap">
+			<result column="photo_id" property="photoId"/>
+			<result column="photo_url" property="photoURL"/>
+			<result column="user_id" property="userId"/>
+	</resultMap>
+	
+	
+	<select id="findPhotoByUserId" parameterType="long" resultType="photo">
+		SELECT
+			photo_id AS photoId,
+			photo_url AS photoURL,
+			user_id AS userId
+		FROM
+			`photo`
+		WHERE
+			user_id =${_parameter}
+
+<!-- 		SELECT -->
+<!-- 			photo_id, -->
+<!-- 			photo_url, -->
+<!-- 			user_id -->
+<!-- 		FROM -->
+<!-- 			`photo` -->
+<!-- 		WHERE -->
+<!-- 			user_id =${_parameter} -->
+	</select>
+</mapper>  

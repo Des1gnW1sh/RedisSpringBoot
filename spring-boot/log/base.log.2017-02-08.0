@@ -1,0 +1,4 @@
+2017-02-08 09:56:58,407 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 17192 (started by yy in D:\迅雷下载\springBoot)
+2017-02-08 09:56:58,409 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-02-08 09:56:58,409 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-02-08 09:57:02,862 INFO (StartupInfoLogger.java:57)- Started Application in 4.725 seconds (JVM running for 5.213)

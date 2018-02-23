@@ -1,0 +1,38 @@
+2018-02-23 17:21:54,509 INFO (StartupInfoLogger.java:48)- Starting Application on USER-20170912GN with PID 10636 (started by Administrator in D:\用户目录\下载\spring-boot)
+2018-02-23 17:21:54,518 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-02-23 17:21:54,519 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2018-02-23 17:22:01,662 INFO (StartupInfoLogger.java:57)- Started Application in 7.577 seconds (JVM running for 10.871)
+2018-02-23 17:25:01,464 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users WHERE `name` = ? 
+2018-02-23 17:25:01,483 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 肖昌伟(String)
+2018-02-23 17:25:01,508 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =1 
+2018-02-23 17:25:01,509 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2018-02-23 17:25:01,516 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2018-02-23 17:25:01,517 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 1
+2018-02-23 17:25:40,891 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2018-02-23 17:25:40,893 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2018-02-23 17:25:40,895 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =1 
+2018-02-23 17:25:40,896 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2018-02-23 17:25:40,899 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2018-02-23 17:25:40,901 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =2 
+2018-02-23 17:25:40,902 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2018-02-23 17:25:40,905 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 1
+2018-02-23 17:25:40,905 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2018-02-23 17:27:44,514 DEBUG (UserController.java:61)- 访问set:key=nimei,value=nimei
+2018-02-23 17:30:15,378 DEBUG (UserController.java:68)- 访问get:key=nimei
+2018-02-23 17:41:07,002 INFO (StartupInfoLogger.java:48)- Starting Application on USER-20170912GN with PID 8512 (started by Administrator in D:\用户目录\下载\spring-boot)
+2018-02-23 17:41:07,006 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-02-23 17:41:07,007 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2018-02-23 17:41:44,330 INFO (StartupInfoLogger.java:48)- Starting Application on USER-20170912GN with PID 7616 (started by Administrator in D:\用户目录\下载\spring-boot)
+2018-02-23 17:41:44,337 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-02-23 17:41:44,338 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2018-02-23 17:41:51,308 INFO (StartupInfoLogger.java:57)- Started Application in 7.543 seconds (JVM running for 9.024)
+2018-02-23 17:42:32,445 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: INSERT INTO users (`name`,pwd,salt) values (?,?,?) 
+2018-02-23 17:42:32,464 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: null, null, null
+2018-02-23 17:42:32,510 DEBUG (BaseJdbcLogger.java:181)- <==    Updates: 1
+2018-02-23 17:44:06,952 INFO (StartupInfoLogger.java:48)- Starting Application on USER-20170912GN with PID 8644 (started by Administrator in D:\用户目录\下载\spring-boot)
+2018-02-23 17:44:06,957 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2018-02-23 17:44:06,958 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2018-02-23 17:44:14,755 INFO (StartupInfoLogger.java:57)- Started Application in 8.325 seconds (JVM running for 9.809)
+2018-02-23 17:44:31,214 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: INSERT INTO users (`name`,pwd,salt) values (?,?,?) 
+2018-02-23 17:44:31,238 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: nimei(String), 123(String), 333(String)
+2018-02-23 17:44:31,277 DEBUG (BaseJdbcLogger.java:181)- <==    Updates: 1

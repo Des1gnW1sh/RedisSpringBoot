@@ -1,0 +1,30 @@
+2017-02-24 15:25:56,034 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 5056 (started by yy in D:\迅雷下载\springBoot)
+2017-02-24 15:25:56,038 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-02-24 15:25:56,039 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-02-24 15:26:00,916 INFO (StartupInfoLogger.java:57)- Started Application in 5.26 seconds (JVM running for 5.688)
+2017-02-24 15:26:31,373 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT id, `name`, pwd, salt FROM users 
+2017-02-24 15:26:31,390 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-02-24 15:26:31,405 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2017-02-24 15:29:49,213 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 9384 (started by yy in D:\迅雷下载\springBoot)
+2017-02-24 15:29:49,215 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-02-24 15:29:49,216 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-02-24 15:29:53,109 INFO (StartupInfoLogger.java:57)- Started Application in 4.119 seconds (JVM running for 4.459)
+2017-02-24 15:35:02,819 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 9440 (started by yy in D:\迅雷下载\springBoot)
+2017-02-24 15:35:02,821 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-02-24 15:35:02,821 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-02-24 15:35:06,721 INFO (StartupInfoLogger.java:57)- Started Application in 4.138 seconds (JVM running for 4.513)
+2017-02-24 15:37:25,884 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 12900 (started by yy in D:\迅雷下载\springBoot)
+2017-02-24 15:37:25,886 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-02-24 15:37:25,886 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-02-24 15:37:29,754 INFO (StartupInfoLogger.java:57)- Started Application in 4.103 seconds (JVM running for 4.461)
+2017-02-24 15:38:00,561 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 12968 (started by yy in D:\迅雷下载\springBoot)
+2017-02-24 15:38:00,563 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-02-24 15:38:00,563 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-02-24 15:38:04,412 INFO (StartupInfoLogger.java:57)- Started Application in 4.079 seconds (JVM running for 4.422)
+2017-02-24 16:14:57,387 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 10340 (started by yy in D:\迅雷下载\springBoot)
+2017-02-24 16:14:57,389 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-02-24 16:14:57,389 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-02-24 16:15:34,002 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 12228 (started by yy in D:\迅雷下载\springBoot)
+2017-02-24 16:15:34,004 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-02-24 16:15:34,005 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-02-24 16:15:37,930 INFO (StartupInfoLogger.java:57)- Started Application in 4.151 seconds (JVM running for 4.504)

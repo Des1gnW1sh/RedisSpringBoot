@@ -1,0 +1,196 @@
+2017-03-08 11:00:33,420 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 16556 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:00:33,425 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:00:33,425 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:01:09,600 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 23512 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:01:09,602 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:01:09,602 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:01:14,179 INFO (StartupInfoLogger.java:57)- Started Application in 4.819 seconds (JVM running for 5.254)
+2017-03-08 11:03:23,946 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT id, `name`, pwd, salt FROM users 
+2017-03-08 11:03:23,963 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:03:23,982 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =1 
+2017-03-08 11:03:23,983 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:03:23,986 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2017-03-08 11:03:23,986 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =2 
+2017-03-08 11:03:23,987 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:03:23,988 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 0
+2017-03-08 11:03:23,989 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2017-03-08 11:30:36,287 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 23744 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:30:36,289 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:30:36,289 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:30:40,753 INFO (StartupInfoLogger.java:57)- Started Application in 4.711 seconds (JVM running for 5.138)
+2017-03-08 11:30:46,905 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:30:46,922 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:30:46,934 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =1 
+2017-03-08 11:30:46,934 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:30:46,937 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2017-03-08 11:30:46,938 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =2 
+2017-03-08 11:30:46,938 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:30:46,940 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 0
+2017-03-08 11:30:46,940 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2017-03-08 11:31:52,112 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 23544 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:31:52,114 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:31:52,115 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:31:56,423 INFO (StartupInfoLogger.java:57)- Started Application in 4.561 seconds (JVM running for 4.999)
+2017-03-08 11:31:59,530 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:31:59,546 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:31:59,558 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =1 
+2017-03-08 11:31:59,559 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:31:59,561 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2017-03-08 11:31:59,562 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =2 
+2017-03-08 11:31:59,562 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:31:59,563 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 1
+2017-03-08 11:31:59,564 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2017-03-08 11:33:34,585 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 23864 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:33:34,587 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:33:34,588 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:33:39,037 INFO (StartupInfoLogger.java:57)- Started Application in 4.689 seconds (JVM running for 5.112)
+2017-03-08 11:33:46,411 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:33:46,428 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:33:46,438 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2017-03-08 11:35:35,514 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 22220 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:35:35,516 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:35:35,517 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:35:39,839 INFO (StartupInfoLogger.java:57)- Started Application in 4.582 seconds (JVM running for 5.0)
+2017-03-08 11:35:44,879 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:35:44,896 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:35:44,907 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:35:44,908 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:35:47,376 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:35:47,377 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:35:47,378 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:35:47,378 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:36:57,856 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 24344 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:36:57,858 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:36:57,858 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:37:02,360 INFO (StartupInfoLogger.java:57)- Started Application in 4.753 seconds (JVM running for 5.173)
+2017-03-08 11:37:13,529 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:37:13,547 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:37:13,559 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:37:13,560 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:37:15,883 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:37:15,884 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:37:15,886 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:37:15,886 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:37:16,391 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:37:16,392 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:37:16,394 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:37:16,394 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:37:16,894 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:37:16,894 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:37:16,896 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:37:16,897 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:37:16,952 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:37:16,952 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:37:16,954 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:37:16,955 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:37:16,972 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:37:16,972 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:37:16,976 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:37:16,977 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:37:16,998 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:37:16,999 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:37:17,001 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:37:17,002 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:37:17,042 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:37:17,042 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:37:17,048 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:37:17,048 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:37:17,066 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:37:17,066 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:37:17,069 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:37:17,070 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:37:17,091 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:37:17,091 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:37:17,093 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:37:17,093 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:37:17,127 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:37:17,128 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:37:17,130 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:37:17,130 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:37:56,012 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 24344 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:37:56,013 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:37:56,013 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:38:03,288 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 24344 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:38:03,288 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:38:03,288 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:38:11,478 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 24344 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:38:11,478 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:38:11,479 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:38:17,593 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 24344 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:38:17,593 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:38:17,593 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:38:18,527 INFO (StartupInfoLogger.java:57)- Started Application in 0.984 seconds (JVM running for 81.34)
+2017-03-08 11:38:28,272 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 24344 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:38:28,272 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:38:28,272 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:38:29,127 INFO (StartupInfoLogger.java:57)- Started Application in 0.885 seconds (JVM running for 91.94)
+2017-03-08 11:38:36,112 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 23268 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:38:36,114 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:38:36,115 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:38:40,626 INFO (StartupInfoLogger.java:57)- Started Application in 4.742 seconds (JVM running for 5.165)
+2017-03-08 11:38:44,368 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:38:44,386 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:38:44,397 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:38:44,398 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:38:44,399 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2017-03-08 11:38:44,400 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =2 
+2017-03-08 11:38:44,401 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:38:44,402 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 1
+2017-03-08 11:38:44,402 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2017-03-08 11:39:11,657 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 23912 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:39:11,659 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:39:11,659 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:39:16,100 INFO (StartupInfoLogger.java:57)- Started Application in 4.678 seconds (JVM running for 5.093)
+2017-03-08 11:39:20,649 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:39:20,666 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:39:20,677 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:39:20,677 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:39:20,678 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2017-03-08 11:39:20,679 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =2 
+2017-03-08 11:39:20,680 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:39:20,680 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 1
+2017-03-08 11:39:20,681 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2017-03-08 11:39:23,290 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:39:23,291 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:39:23,293 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:39:23,293 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:39:23,294 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2017-03-08 11:39:23,295 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =2 
+2017-03-08 11:39:23,295 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:39:23,296 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 1
+2017-03-08 11:39:23,296 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2017-03-08 11:39:23,823 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:39:23,824 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:39:23,825 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:39:23,825 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:39:23,826 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2017-03-08 11:39:23,827 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =2 
+2017-03-08 11:39:23,827 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:39:23,828 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 1
+2017-03-08 11:39:23,828 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2017-03-08 11:39:24,264 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:39:24,265 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:39:24,267 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =1 
+2017-03-08 11:39:24,267 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:39:24,268 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2017-03-08 11:39:24,269 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id, photo_url, user_id FROM `photo` WHERE user_id =2 
+2017-03-08 11:39:24,269 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:39:24,270 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 1
+2017-03-08 11:39:24,270 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
+2017-03-08 11:39:47,899 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 23912 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:39:47,900 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:39:47,900 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:39:49,359 INFO (StartupInfoLogger.java:57)- Started Application in 1.525 seconds (JVM running for 38.352)
+2017-03-08 11:41:08,606 INFO (StartupInfoLogger.java:48)- Starting Application on zx with PID 24416 (started by yy in D:\迅雷下载\springBoot)
+2017-03-08 11:41:08,608 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.1.RELEASE, Spring v4.3.6.RELEASE
+2017-03-08 11:41:08,609 INFO (SpringApplication.java:637)- No active profile set, falling back to default profiles: default
+2017-03-08 11:41:13,161 INFO (StartupInfoLogger.java:57)- Started Application in 4.793 seconds (JVM running for 5.216)
+2017-03-08 11:41:16,584 DEBUG (BaseJdbcLogger.java:181)- ==>  Preparing: SELECT user_id, `name`, pwd, salt FROM users 
+2017-03-08 11:41:16,601 DEBUG (BaseJdbcLogger.java:181)- ==> Parameters: 
+2017-03-08 11:41:16,613 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =1 
+2017-03-08 11:41:16,614 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:41:16,616 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 2
+2017-03-08 11:41:16,617 DEBUG (BaseJdbcLogger.java:181)- ====>  Preparing: SELECT photo_id AS photoId, photo_url AS photoURL, user_id AS userId FROM `photo` WHERE user_id =2 
+2017-03-08 11:41:16,617 DEBUG (BaseJdbcLogger.java:181)- ====> Parameters: 
+2017-03-08 11:41:16,619 DEBUG (BaseJdbcLogger.java:181)- <====      Total: 1
+2017-03-08 11:41:16,619 DEBUG (BaseJdbcLogger.java:181)- <==      Total: 2
