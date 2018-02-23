@@ -14,6 +14,9 @@ import java.util.Random;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
+/**
+ * 测试
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles(profiles = "test")
