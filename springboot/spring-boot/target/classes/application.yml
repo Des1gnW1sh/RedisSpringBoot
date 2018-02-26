@@ -1,12 +1,12 @@
 server: 
-  port: 8088
+  port: 8080
     
 spring:
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@172.30.3.74:1521/masterpdb
-    username: fplatform
-    password: 123456
+    url: jdbc:oracle:thin:@172.30.3.74:1521/fplatform
+    username: system
+    password: admin
     test-on-borrow: true
     testWhileIdle: true
     validation-query: SELECT 1

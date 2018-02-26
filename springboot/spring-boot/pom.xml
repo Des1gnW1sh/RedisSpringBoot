@@ -29,10 +29,16 @@
 		</dependency>
 
 		<!-- 连接oracle数据库jar包 -->
-		<dependency>
+	<!--	<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc6</artifactId>
-			<version>12.1.0.2</version>
+			<version>11.1.0.7.0</version>
+			<scope>test</scope>
+		</dependency>-->
+		<dependency>
+			<groupId>oracle</groupId>
+			<artifactId>ojdbc14</artifactId>
+			<version>10.2.0.4</version>
 		</dependency>
 
 		<!-- Spring Boot Mybatis 依赖 -->
