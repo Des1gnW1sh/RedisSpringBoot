@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.rule.dao.RuleEnableDetailDao">
+    
+	<sql id="ruleEnableDetailColumns">
+		a.id AS "id",
+		a.e_id AS "eId",
+		a.column_id AS "columnId",
+		a.column_name AS "columnName"
+	</sql>
+	
+	<sql id="ruleEnableDetailJoins">
+	</sql>
+    
+	<select id="get" resultType="RuleEnableDetail">
+		SELECT 
+			<include refid="ruleEnableDetailColumns"/>
+		FROM rule_enable_detail a
+		<include refid="ruleEnableDetailJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	<!-- 导入导出时作为子表时启用   若有删除字段：and a.del_flag = 0 -->
+	<select id="getByName" resultType="RuleEnableDetail">
+		SELECT 
+			<include refid="ruleEnableDetailColumns"/>
+		FROM rule_enable_detail a
+		<include refid="ruleEnableDetailJoins"/>
+		WHERE a.name =#{name}
+	</select>
+	
+	<select id="findList" resultType="RuleEnableDetail">
+		SELECT 
+			<include refid="ruleEnableDetailColumns"/>
+		FROM rule_enable_detail a
+		<include refid="ruleEnableDetailJoins"/>
+		<where>
+			
+			<if test="eId != null and eId != ''">
+				AND a.e_id = #{eId}
+			</if>
+			<if test="columnId != null and columnId != ''">
+				AND a.column_id = #{columnId}
+			</if>
+			<if test="columnName != null and columnName != ''">
+				AND a.column_name = #{columnName}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="RuleEnableDetail">
+		SELECT 
+			<include refid="ruleEnableDetailColumns"/>
+		FROM rule_enable_detail a
+		<include refid="ruleEnableDetailJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">	
+		INSERT INTO rule_enable_detail(
+			id,
+			e_id,
+			column_id,
+			column_name
+		) VALUES (
+			#{id},
+			#{eId},
+			#{columnId},
+			#{columnName}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE rule_enable_detail SET 	
+			e_id = #{eId},
+			column_id = #{columnId},
+			column_name = #{columnName}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM rule_enable_detail
+		WHERE id = #{id}
+	</update>
+	
+		<update id="batchDelete">
+			DELETE FROM rule_enable_detail
+			WHERE id in
+				<foreach collection="ids" index="index" item="id" open="(" separator="," close=")">   
+					#{id}  
+				</foreach>  
+	</update>
+	
+	<update id="batchDeleteByEId">
+			DELETE FROM rule_enable_detail
+			WHERE  e_id = #{eId}
+	</update>
+</mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.report.dao.ExcelBudgetReportLogDao">
+    
+	<sql id="excelBudgetReportLogColumns">
+		a.id AS "id",
+		a.content AS "content",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.budget_id AS "budgetId"
+	</sql>
+	
+	<sql id="excelBudgetReportLogJoins">
+	</sql>
+    
+	<select id="get" resultType="ExcelBudgetReportLog">
+		SELECT 
+			<include refid="excelBudgetReportLogColumns"/>
+		FROM excel_budget_report_log a
+		<include refid="excelBudgetReportLogJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ExcelBudgetReportLog">
+		SELECT 
+			<include refid="excelBudgetReportLogColumns"/>
+		FROM excel_budget_report_log a
+		<include refid="excelBudgetReportLogJoins"/>
+		<where>
+			
+			<if test="beginCreateDate != null and endCreateDate != null and beginCreateDate != '' and endCreateDate != ''">
+				AND a.create_date BETWEEN #{beginCreateDate} AND #{endCreateDate}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ExcelBudgetReportLog">
+		SELECT 
+			<include refid="excelBudgetReportLogColumns"/>
+		FROM excel_budget_report_log a
+		<include refid="excelBudgetReportLogJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO excel_budget_report_log(
+			ID,
+			content,
+			create_by,
+			create_date,
+			budget_id
+		) VALUES (
+			#{id},
+			#{content},
+			#{createBy.id},
+			#{createDate},
+			#{budget.id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE excel_budget_report_log SET 	
+			content = #{content},
+			budget_id = #{budget.id}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM excel_budget_report_log
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

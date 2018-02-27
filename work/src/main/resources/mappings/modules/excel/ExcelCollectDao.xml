@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.excel.dao.ExcelCollectDao">
+    
+	<sql id="excelCollectColumns">
+		a.id AS "id",
+		a.office_id AS "office.id",
+		a.budget_id AS "budget.id",
+		a.sumit_user AS "sumitUser",
+		a.status AS "status",
+		<!-- a.xml AS "xml", -->
+		a.update_date AS "updateDate",
+		a1.name AS "budget.name",
+		o2.name AS "office.name"
+	</sql>
+	
+	<sql id="excelCollectJoins">
+		LEFT JOIN sys_office o2 ON o2.id = a.office_id
+		LEFT JOIN excel_budget a1 on a1.id = a.budget_id
+	</sql>
+    
+	<select id="get" resultType="ExcelCollect">
+		SELECT 
+			<include refid="excelCollectColumns"/>
+		FROM excel_collect a
+		<include refid="excelCollectJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	<!-- 用户修改模板时检查是否有提交 -->
+	<select id="findOverByModel" resultType="Integer">
+		SELECT count(*) from excel_collect a 
+		<include refid="excelCollectJoins"/>
+		LEFT JOIN excel_model a2 ON a2.id = a1.excle_model_id
+		where 	a2.id = #{id}  AND a.status = #{status}
+	</select>
+	<select id="findList" resultType="ExcelCollect">
+		SELECT 
+			<include refid="excelCollectColumns"/>
+		FROM excel_collect a
+		<include refid="excelCollectJoins"/>
+		<where>
+			<if test="office != null and office.id != null and office.id != ''">
+				AND a.office_id = #{office.id}
+			</if>
+			<if test="budget != null and budget.id != null and budget.id != ''">
+				AND a.budget_id = #{budget.id}
+			</if>
+			<if test="budget != null and budget.name != null and budget.name != ''">
+				AND a1.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{budget.name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{budget.name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{budget.name},'%')</if>
+			</if>
+			
+			<if test="beginUpdateDate != null and endUpdateDate != null and beginUpdateDate != '' and endUpdateDate != ''">
+				AND a.update_date BETWEEN #{beginUpdateDate} AND #{endUpdateDate}
+			</if>
+			<if test="status != null and status !=''">
+				AND a.status = #{status}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<select id="findListOfMy" resultType="ExcelCollect">
+		SELECT 
+			<include refid="excelCollectColumns"/>
+		FROM excel_collect a
+		<include refid="excelCollectJoins"/>
+		<where>
+			AND a.office_id in
+				<foreach collection="offices" item="office"  index="index" open="(" close=")" separator=",">
+					#{office.id}
+				</foreach>
+			<if test="collect.budget != null and collect.budget.name != null and collect.budget.name != ''">
+				AND a1.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{collect.budget.name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{collect.budget.name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{collect.budget.name},'%')</if>
+			</if>
+			<if test="collect.beginUpdateDate != null and collect.endUpdateDate != null and collect.beginUpdateDate != '' and collect.endUpdateDate != ''">
+				AND a.update_date BETWEEN #{collect.beginUpdateDate} AND #{collect.endUpdateDate}
+			</if>
+		</where>
+		<choose>
+			<when test="collect.page !=null and collect.page.orderBy != null and collect.page.orderBy != ''">
+				ORDER BY ${collect.page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ExcelCollect">
+		SELECT 
+			<include refid="excelCollectColumns"/>
+		FROM excel_collect a
+		<include refid="excelCollectJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO excel_collect(
+			id,
+			office_id,
+			budget_id,
+			sumit_user,
+			status,
+			xml,
+			update_date
+		) VALUES (
+			#{id},
+			#{office.id},
+			#{budget.id},
+			#{sumitUser.id},
+			#{status},
+			#{xml},
+			#{updateDate}
+		)
+	</insert>
+	<select id="getXmlById" resultType="String">
+		SELECT xml
+		FROM excel_collect 
+		WHERE id = #{id}
+	</select>
+	
+	<update id="saveXml">
+		UPDATE excel_collect SET 	
+			xml = #{xml},
+			status = #{status},
+			sumit_user = #{sumitUser},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	<update id="updateStatus">
+		UPDATE excel_collect SET 
+			status = 	 #{status}
+		WHERE id = #{id}
+	</update>
+	<update id="update">
+		UPDATE excel_collect SET 	
+			office_id = #{office.id},
+			budget_id = #{budget.id},
+			xml = #{xml}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM excel_collect
+		WHERE id = #{id}
+	</update>
+	
+	<update id="deleteByBugetId">
+		DELETE FROM excel_collect 
+		WHERE budget_id = #{id}
+	</update>
+</mapper>

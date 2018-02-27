@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.sys.orgs.dao.SysOrgsDao">
+    
+	<sql id="sysOrgsColumns">
+		a.id AS "id",
+		a.code AS "code",
+		a.parent_id AS "parent.id",
+		o2.code AS "parent.code",
+		a.parent_ids AS "parentIds",
+		a.name AS "name",
+		a.fullname AS "fullName",
+		a.fiscal_type_id AS "fiscalType.id",
+		f.name AS "fiscalType.name",
+		a.putunder AS "putunder.id",
+		o1.name AS "putunder.name",
+		a.area_id AS "area.id",
+		a.type_id AS "type",
+		a.primary_person AS "primaryPerson",
+		a.deputy_person AS "deputyPerson",
+		a.address AS "address",
+		a.zip_code AS "zipCode",
+		a.phone AS "phone",
+		a.fax AS "fax",
+		a.email AS "email",
+		a.useable AS "useable",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a10.name AS "area.name"
+	</sql>
+	
+	<sql id="sysOrgsJoins">
+		LEFT JOIN sys_orgs_fiscal f ON f.id = a.fiscal_type_id
+		LEFT JOIN sys_area a10 ON a10.id = a.area_id
+		LEFT JOIN sys_orgs o1 ON o1.id = a.putunder
+		LEFT JOIN sys_orgs o2 ON o2.id = a.parent_id
+	</sql>
+    
+	<select id="get" resultType="SysOrgs">
+		SELECT 
+			<include refid="sysOrgsColumns"/>
+		FROM sys_orgs a
+		<include refid="sysOrgsJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="getByName" resultType="SysOrgs">
+		SELECT 
+			<include refid="sysOrgsColumns"/>
+		FROM sys_orgs a
+		<include refid="sysOrgsJoins"/>
+		WHERE a.name = #{name} and a.del_flag = 0
+	</select>
+	<select id="getByCode" resultType="SysOrgs">
+		SELECT 
+			<include refid="sysOrgsColumns"/>
+		FROM sys_orgs a
+		<include refid="sysOrgsJoins"/>
+		WHERE a.code = #{code} and a.del_flag = 0
+	</select>
+	
+	<select id="findList" resultType="SysOrgs">
+		SELECT 
+			<include refid="sysOrgsColumns"/>
+		FROM sys_orgs a
+		<include refid="sysOrgsJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="parent != null and parent.id != null and parent.id != ''">
+				AND a.parent_id = #{parent.id}
+			</if>
+			<if test="parentIds != null and parentIds != ''">
+				AND a.parent_ids LIKE 
+					<if test="dbName == 'oracle'">'%'||#{parentIds}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{parentIds}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{parentIds},'%')</if>
+			</if>
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="fiscalType != null and fiscalType.id != null and fiscalType.id != ''">
+				AND a.fiscal_type_id = #{fiscalType.id}
+			</if>
+			<if test="fiscalType != null and fiscalType.name != null and fiscalType.name != ''">
+				AND f.name = #{fiscalType.name}
+			</if>
+			<if test="putunder != null and putunder.id != null and putunder.id != ''">
+				AND a.putunder = #{putunder.id}
+			</if>
+			<if test="area != null and area.id != null and area.id != ''">
+				AND a.area_id = #{area.id}
+			</if>
+			<if test="type != null and type != ''">
+				AND a.type_id = #{type}
+			</if>
+		</where>
+	</select>
+	
+	<select id="findAllList" resultType="SysOrgs">
+		SELECT 
+			<include refid="sysOrgsColumns"/>
+		FROM sys_orgs a
+		<include refid="sysOrgsJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+	</select>
+	
+	<select id="findByParentIdsLike" resultType="SysOrgs">
+		SELECT
+			a.id,
+			a.parent_id AS "parent.id",
+			a.parent_ids
+		FROM sys_orgs a
+		<include refid="sysOrgsJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			AND a.parent_ids LIKE #{parentIds}
+		</where>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO sys_orgs(
+			id,
+			code,
+			parent_id,
+			parent_ids,
+			name,
+			fullname,
+			fiscal_type_id,
+			putunder,
+			area_id,
+			type_id,
+			primary_person,
+			deputy_person,
+			address,
+			zip_code,
+			phone,
+			fax,
+			email,
+			useable,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{code},
+			#{parent.id},
+			#{parentIds},
+			#{name},
+			#{fullName},
+			#{fiscalType.id},
+			#{putunder.id},
+			#{area.id},
+			#{type},
+			#{primaryPerson},
+			#{deputyPerson},
+			#{address},
+			#{zipCode},
+			#{phone},
+			#{fax},
+			#{email},
+			#{useable},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE sys_orgs SET 	
+			code = #{code},
+			parent_id = #{parent.id},
+			parent_ids = #{parentIds},
+			name = #{name},
+			fullname = #{fullName},
+			fiscal_type_id = #{fiscalType.id},
+			putunder = #{putunder.id},
+			area_id = #{area.id},
+			type_id = #{type},
+			primary_person = #{primaryPerson},
+			deputy_person = #{deputyPerson},
+			address = #{address},
+			zip_code = #{zipCode},
+			phone = #{phone},
+			fax = #{fax},
+			email = #{email},
+			useable = #{useable},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateParentIds">
+		UPDATE sys_orgs SET 
+			parent_id = #{parent.id}, 
+			parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE sys_orgs SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE
+			id = #{id}
+		OR
+			parent_ids LIKE <if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+							<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+							<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+	</update>
+	
+</mapper>

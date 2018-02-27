@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.report.dao.ExcelConfigGlobalDao">
+
+    <resultMap id="ReportMap" type="ExcelConfigGlobal">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="isopen" property="isOpen" jdbcType="INTEGER"/>
+        <result column="isday" property="isDay" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="INTEGER"/>
+        <result column="userid" property="userId" jdbcType="VARCHAR"/>
+        <result column="createby" property="createBy.id" jdbcType="VARCHAR"/>
+        <result column="createTime" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="updateby" property="updateBy.id" jdbcType="VARCHAR"/>
+        <result column="updateTime" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="del_Flag" property="delFlag" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="configColumns">
+		a.id AS "id",
+		a.isday AS "isDay",
+		a.isopen AS "isOpen",
+		a.time AS "time",
+		a.userid AS "userId",
+		a.createby AS "createBy.id",
+		a.createTime AS "createDate",
+		a.updateby AS "updateBy.id",
+		a.updateTime AS "updateDate",
+		a.del_flag AS "delFlag"
+	</sql>
+
+    <sql id="excelBudgetReportJoins">
+
+    </sql>
+
+    <select id="get" resultMap="ReportMap">
+        SELECT
+        <include refid="configColumns"/>
+        FROM excel_conf_user a
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="getByUserId" resultMap="ReportMap">
+        SELECT
+        <include refid="configColumns"/>
+        FROM excel_conf_user a
+        WHERE a.userid = #{userId}
+    </select>
+
+
+    <insert id="insert">
+		INSERT INTO excel_conf_user(
+			id,
+			isopen,
+			isday,
+			time,
+			userid,
+			createby,
+			createTime,
+			updateby,
+			updateTime,
+			DEL_FLAG
+		) VALUES (
+			#{id},
+			#{isOpen},
+			#{isDay},
+			#{time},
+			#{userId},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{delFlag}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE excel_conf_user SET
+			isopen = #{isOpen},
+			isday = #{isDay},
+			time = #{time},
+			userid = #{userId},
+			updateby=#{updateBy.id},
+			updateTime=#{updateDate},
+			DEL_FLAG=#{delFlag}
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+		UPDATE excel_conf_user SET
+			DEL_FLAG = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+	<!--获取配置过的用户的部门id-->
+	<select id="getAllConfig" resultType="ExcelConfigGlobal">
+		select
+		  a.id AS "id",
+		  a.isday AS "isDay",
+		  a.isopen AS "isOpen",
+		  a.time AS "time",
+		  a.userid AS "userId",
+		  a.createby AS "createBy.id",
+		  a.createTime AS "createDate",
+		  a.updateby AS "updateBy.id",
+		  a.updateTime AS "updateDate",
+		  a.del_flag AS "delFlag",
+		  a.userid,
+		  u.OFFICE_ID AS "office.id"
+
+		from
+		  excel_conf_user a, sys_user u,sys_office o
+		where
+		  u.id = a.userid
+		and
+		  u.OFFICE_ID=o.ID
+	</select>
+</mapper>

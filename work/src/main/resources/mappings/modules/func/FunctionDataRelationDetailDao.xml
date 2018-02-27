@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.func.dao.FunctionDataRelationDetailDao">
+    
+	<sql id="functionDataRelationDetailColumns">
+		a.id AS "id",
+		a.f_id AS "fId",
+		a.retinue_table_name AS "retinueTableName",
+		a.retinue_table_id AS "retinueTableId",
+		a.retinue_column_name AS "retinueColumnName",
+		a.retinue_column AS "retinueColumn",
+		a.column_id AS "columnId",
+		a.column_name AS "columnName"
+	</sql>
+	
+	<sql id="functionDataRelationDetailJoins">
+	</sql>
+    
+	<select id="get" resultType="FunctionDataRelationDetail">
+		SELECT 
+			<include refid="functionDataRelationDetailColumns"/>
+		FROM function_data_relation_detail a
+		<include refid="functionDataRelationDetailJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	<!-- 导入导出时作为子表时启用   若有删除字段：and a.del_flag = 0 -->
+	<select id="getByName" resultType="FunctionDataRelationDetail">
+		SELECT 
+			<include refid="functionDataRelationDetailColumns"/>
+		FROM function_data_relation_detail a
+		<include refid="functionDataRelationDetailJoins"/>
+		WHERE a.name =#{name}
+	</select>
+	
+	<select id="findList" resultType="FunctionDataRelationDetail">
+		SELECT 
+			<include refid="functionDataRelationDetailColumns"/>
+		FROM function_data_relation_detail a
+		<include refid="functionDataRelationDetailJoins"/>
+		<where>
+			
+			<if test="fId != null and fId != ''">
+				AND a.f_id = #{fId}
+			</if>
+			<if test="retinueTableName != null and retinueTableName != ''">
+				AND a.retinue_table_name = #{retinueTableName}
+			</if>
+			<if test="retinueTableId != null and retinueTableId != ''">
+				AND a.retinue_table_id = #{retinueTableId}
+			</if>
+			<if test="retinueColumnName != null and retinueColumnName != ''">
+				AND a.retinue_column_name = #{retinueColumnName}
+			</if>
+			<if test="retinueColumn != null and retinueColumn != ''">
+				AND a.retinue_column = #{retinueColumn}
+			</if>
+			<if test="columnId != null and columnId != ''">
+				AND a.column_id = #{columnId}
+			</if>
+			<if test="columnName != null and columnName != ''">
+				AND a.column_name = #{columnName}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="FunctionDataRelationDetail">
+		SELECT 
+			<include refid="functionDataRelationDetailColumns"/>
+		FROM function_data_relation_detail a
+		<include refid="functionDataRelationDetailJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO function_data_relation_detail(
+			id,
+			f_id,
+			retinue_table_name,
+			retinue_table_id,
+			retinue_column_name,
+			retinue_column,
+			column_id,
+			column_name
+		) VALUES (
+			#{id},
+			#{fId},
+			#{retinueTableName},
+			#{retinueTableId},
+			#{retinueColumnName},
+			#{retinueColumn},
+			#{columnId},
+			#{columnName}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE function_data_relation_detail SET 	
+			f_id = #{fId},
+			retinue_table_name = #{retinueTableName},
+			retinue_table_id = #{retinueTableId},
+			retinue_column_name = #{retinueColumnName},
+			retinue_column = #{retinueColumn},
+			column_id = #{columnId},
+			column_name = #{columnName}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM function_data_relation_detail
+		WHERE id = #{id}
+	</update>
+	
+		<update id="batchDelete">
+			DELETE FROM function_data_relation_detail
+			WHERE id in
+				<foreach collection="ids" index="index" item="id" open="(" separator="," close=")">   
+					#{id}  
+				</foreach>  
+	</update>
+	
+	<update id="batchDeleteByFid">
+			DELETE FROM function_data_relation_detail
+			WHERE f_id =  #{fId}
+	</update>
+</mapper>

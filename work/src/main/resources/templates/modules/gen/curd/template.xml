@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>service</name>
+	<filePath>src/main/java/com/scnjwh/intellectreport/common/utils/excel/fieldtype</filePath>
+	<fileName>${ClassName}Type.java</fileName>
+	<content><![CDATA[
+/**
+ * Copyright &copy; 2012-2016 <a href="https://www.scnjwh.com">内江五环科技</a> All rights reserved.
+ */
+package com.scnjwh.intellectreport.common.utils.excel.fieldtype;
+
+import com.scnjwh.intellectreport.common.utils.SpringContextHolder;
+import com.scnjwh.intellectreport.common.utils.StringUtils;
+import ${packageName}.${moduleName}.entity<#if subModuleName != "">.${subModuleName}</#if>.${ClassName};
+import ${packageName}.${moduleName}.dao<#if subModuleName != "">.${subModuleName}</#if>.${ClassName}Dao;
+
+/**
+ * ${functionName}Type
+ * 导入导出时 若此类为子类时使用
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+ public class ${ClassName}Type {
+	
+	private static ${ClassName}Dao ${className}Dao = SpringContextHolder.getBean(${ClassName}Dao.class);
+	/**
+	 * 获取对象值（导入）
+	 */
+	public static Object getValue(String val) {
+		if(StringUtils.isBlank(val)){
+			return null;
+		}
+		return ${className}Dao.getByName(val);
+	}
+
+	/**
+	 * 设置对象值（导出）
+	 */
+	public static String setValue(Object val) {
+		if (val != null && ((${ClassName})val).getName() != null){
+			return ((${ClassName})val).getName();
+		}
+		return "";
+	}
+}]]>
+	</content>
+</template>

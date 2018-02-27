@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd"
+	    default-lazy-init="true">
+
+	<description>Spring Configuration</description>
+
+    <!-- 邮件提醒定时任务 start-->
+    <bean name="remindJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.scnjwh.intellectreport.common.timedtask.ReportEmailTask" />
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="timeout" value="0" />
+            </map>
+        </property>
+    </bean>
+    <bean id="remindCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="remindJob" />
+        <property name="cronExpression" value="0 */1 * * * ?" />
+    </bean>
+    <!-- 邮件提醒定时任务  end -->
+
+    <!-- 任务结束邮件提醒定时任务 start-->
+    <bean name="noticeJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.scnjwh.intellectreport.common.timedtask.ReportEndNoticeTask" />
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="timeout" value="0" />
+            </map>
+        </property>
+    </bean>
+    <bean id="noticeCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="noticeJob" />
+        <property name="cronExpression" value="0 */1 * * * ?" />
+    </bean>
+    <!-- 任务结束邮件提醒定时任务  end -->
+
+    <!-- 报表任务填报情况统计任务 start-->
+    <bean name="stateCountJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.scnjwh.intellectreport.common.timedtask.TaskStateCountTask" />
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="timeout" value="0" />
+            </map>
+        </property>
+    </bean>
+    <bean id="stateCountCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="stateCountJob" />
+        <property name="cronExpression" value="0 */1 * * * ?" />
+    </bean>
+    <!-- 报表任务填报情况统计任务  end -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="remindCronTrigger" />
+                <ref bean="noticeCronTrigger" />
+                 <ref bean="stateCountCronTrigger" />
+            </list>
+        </property>
+    </bean>
+
+</beans>

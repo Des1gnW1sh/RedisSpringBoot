@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.taskstate.dao.TaskStateDao">
+    
+	<sql id="taskStateColumns">
+		a.id AS "id",
+		a.user_id AS "user.id",
+		a.task_ids AS "taskIds",
+		a.running_num AS "runningNum",
+		a.overtime_num AS "overtimeNum",
+		a.is_check AS "isCheck",
+		a.check_time AS "checkTime",
+		u2.name AS "user.name"
+	</sql>
+	
+	<sql id="taskStateJoins">
+		LEFT JOIN sys_user u2 ON u2.id = a.user_id
+	</sql>
+    
+	<select id="get" resultType="TaskState">
+		SELECT 
+			<include refid="taskStateColumns"/>
+		FROM t_task_state a
+		<include refid="taskStateJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	<!-- 导入导出时作为子表时启用   若有删除字段：and a.del_flag = 0 -->
+	<select id="getByName" resultType="TaskState">
+		SELECT 
+			<include refid="taskStateColumns"/>
+		FROM t_task_state a
+		<include refid="taskStateJoins"/>
+		WHERE a.name =#{name}
+	</select>
+	
+	<select id="findList" resultType="TaskState">
+		SELECT 
+			<include refid="taskStateColumns"/>
+		FROM t_task_state a
+		<include refid="taskStateJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="TaskState">
+		SELECT 
+			<include refid="taskStateColumns"/>
+		FROM t_task_state a
+		<include refid="taskStateJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+
+	<!--根据用户查询任务统计-->
+	<select id="getByUserId" parameterType="String" resultType="TaskState">
+		SELECT
+		<include refid="taskStateColumns"/>
+		FROM t_task_state a
+		<include refid="taskStateJoins"/>
+		WHERE a.user_id=#{userId}
+	</select>
+
+	<!--查询未查看用户任务统计-->
+	<select id="getNoCheckByUser" parameterType="String" resultType="TaskState">
+		SELECT
+		<include refid="taskStateColumns"/>
+		FROM t_task_state a
+		<include refid="taskStateJoins"/>
+		WHERE a.user_id=#{userId} and a.is_check=0
+	</select>
+
+	<insert id="insert">
+		INSERT INTO t_task_state(
+			id,
+			user_id,
+			task_ids,
+			running_num,
+			about_end_num,
+			overtime_num,
+			is_check,
+			check_time
+		) VALUES (
+			#{id},
+			#{user.id},
+			#{taskIds},
+			#{runningNum},
+			#{overtimeNum},
+			#{isCheck},
+			#{checkTime}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_task_state
+		<set>
+			<if test="taskIds != null">
+				task_ids = #{taskIds},
+			</if>
+			<if test="runningNum != null">
+				running_num = #{runningNum},
+			</if>
+			<if test="aboutEndNum != null">
+				about_end_num = #{aboutEndNum},
+			</if>
+			<if test="overtimeNum != null">
+				overtime_num = #{overtimeNum},
+			</if>
+			<if test="isCheck != null">
+				is_check = #{isCheck},
+			</if>
+			<if test="checkTime != null">
+				check_time = #{checkTime},
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM t_task_state
+		WHERE id = #{id}
+	</update>
+	
+	<update id="batchDelete">
+		DELETE FROM t_task_state
+		WHERE id in
+			<foreach collection="ids" index="index" item="id" open="(" separator="," close=")">   
+				#{id}  
+			</foreach>  
+	</update>
+</mapper>

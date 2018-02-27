@@ -1,0 +1,146 @@
+<config>
+	<enabled>true</enabled><!-- false为不上传 -->
+	<!--
+	baseURL 是CKFinder发布后URL基本路径；
+	baseDir是服务器上文件存放地址的绝对路径，且必须是全路径。这两个地址指向必须是相同的，CKFinder 还要求路径中必须有最后一个斜线
+    <baseDir>D:\Program Files\Apache Software Foundation\Tomcat 6.0\webapps\CKEditor_test\files\</baseDir>  
+    <baseURL>/CKEditor_test/files/</baseURL>  
+    
+	或者也可以不写 baseDir 属性，让CKFinder 根据baseURL自己去判断文件存放路径:<baseDir></baseDir>
+	 -->
+	<baseDir></baseDir>
+	<baseURL>/userfiles/</baseURL>
+	
+	
+	<licenseKey></licenseKey>
+	<licenseName></licenseName>
+	
+	<!-- 这三个属性分别用于设置上传图片的最大宽度、最大高度以及图片品质。如果上传的图片大小超过预设的值，CKFinder 将按比例对其进行缩放。 -->
+	<imgWidth>1024</imgWidth>
+	<imgHeight>768</imgHeight>
+	<imgQuality>80</imgQuality>
+	
+	
+	<uriEncoding>UTF-8</uriEncoding>
+	<!-- Force ASCII names for files and folders. If enabled, characters with 
+		diactric marks will be automatically converted to ASCII letters -->
+	<forceASCII>false</forceASCII>
+	<!-- Increases the security on an IIS web server. If enabled, CKFinder will 
+		disallow creating folders and uploading files whose names contain characters 
+		that are not safe under an IIS web server. -->
+    <disallowUnsafeCharacters>false</disallowUnsafeCharacters>
+    <!-- 
+    userRoleSessionVar 是一个 session 级的变量的名称，CKFinder 用这个变量来获取当前用户的角色。
+   	 要切换至不同的角色，可以在 session 中这样控制：
+    HttpSession session = request.getSession(true);  
+    session.setAttribute("CKFinder_UserRole", "admin");  
+     -->
+	<userRoleSessionVar>CKFinder_UserRole</userRoleSessionVar>
+	
+	<!-- 接受一个布尔值，对允许上传列表中扩展名的校验规则。如果置为 true，每个“.”后的单词均被视为文件的扩展名进行校验，否则，只将最后一个“.”后的单词视为扩展名并进行校验。 -->
+	<checkDoubleExtension>true</checkDoubleExtension>
+	<checkSizeAfterScaling>true</checkSizeAfterScaling>
+	<!-- 是否对上传的图片类型的文件进行格式校验。 -->
+	<secureImageUploads>true</secureImageUploads>
+	<!-- 通知 CKFinder 将何种类型的文件视为 HTML 代码上传。 -->
+	<htmlExtensions>html,htm,xml,js</htmlExtensions>
+	
+	<!--  当一些文件夹不想被用户看到时，如cvs、svn的文件夹不想让用户浏览，可以在这里配置其对用户隐藏。 -->
+	<hideFolders>
+		<folder>.*</folder>
+		<folder>CVS</folder>
+	</hideFolders>
+	<hideFiles>
+		<file>.*</file>
+	</hideFiles>
+	<defaultResourceTypes></defaultResourceTypes>
+	
+	<!-- 
+	url 和 directory – 这种类型的文件上传的 url 和 dir。
+	maxSize – 文件最大限制，默认以 bytes 为单位。此处也可以使用 G , M , K 为单位， 1M 为 1048576 bytes (1 Megabyte), 1K 为 1024 bytes (1 Kilobyte), 1G 为 1 Gigabyte。
+	allowedExtensions - 允许上传的文件类型。
+	deniedExtensions - 不允许上传的文件类型。
+	建议使用allowedExtensions。
+	  -->
+	<types>
+		<type name="files">
+			<url>%BASE_URL%files/</url>
+			<directory>%BASE_DIR%files</directory>
+			<maxSize>1G</maxSize>
+			<allowedExtensions>7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip</allowedExtensions>
+			<deniedExtensions></deniedExtensions>
+		</type>
+		<type name="images">
+			<url>%BASE_URL%images/</url>
+			<directory>%BASE_DIR%images</directory>
+			<maxSize>10M</maxSize>
+			<allowedExtensions>bmp,gif,jpeg,jpg,png</allowedExtensions>
+			<deniedExtensions></deniedExtensions>
+		</type>
+		<type name="flash">
+			<url>%BASE_URL%flash/</url>
+			<directory>%BASE_DIR%flash</directory>
+			<maxSize>1G</maxSize>
+			<allowedExtensions>swf,flv</allowedExtensions>
+			<deniedExtensions></deniedExtensions>
+		</type>
+	</types>
+	<!-- 
+	accessControls 用于为 CKFinder 中文件及文件夹对于不同用户的不同操作权限。默认情况是为所有用户开放所有文件及文件夹的所有操作权限 
+	
+	role - 角色名称，默认是所有用户（*）。
+	resourceType - 资源类型，如Images, Flash, Files。默认为当前配置对所有类型（*）有效。
+	folder - 要进行限制的文件夹。
+	folder* and file* - 所有以folder和file开头的配置，都是一个布尔值，看名称就知道是干什么的了。
+	可以在 accessControls 下配置多个 accessControl 节点。所有的子文件夹或文件默认继承它们父文件夹的权限配置。
+	-->
+	<accessControls>
+		<accessControl>
+			<role>*</role>
+			<resourceType>*</resourceType>
+			<folder>/</folder>
+			<folderView>false</folderView>
+			<folderCreate>false</folderCreate>
+			<folderRename>false</folderRename>
+			<folderDelete>false</folderDelete>
+			<fileView>false</fileView>
+			<fileUpload>false</fileUpload>
+			<fileRename>false</fileRename>
+			<fileDelete>false</fileDelete>
+		</accessControl>
+	</accessControls>
+	<!-- 
+	CKFinder 允许为上传的图片创建缩略图，缩略图的配置在 thumbs 节点中，如：
+	
+	maxWidth 和 maxHeight –设置缩略图的宽度和高度，单位为像素。
+	quality - 缩略图的品质，1至100之间。可以接受的品质的值最小为45左右，最常用的值为80左右。
+	directAccess - 这个配置可以提高 CKFinder 的整体性能。默认情况下，CKFinder 连接至 server connector 以获取缩略图。
+		通常情况下，connector 会发送HTTP/304 Not Modified header以减轻服务器端压力，如果directAccess被置为true，CKFinder 直接从服务器获取缩略图。 
+	 -->
+	<thumbs>
+		<enabled>true</enabled>
+		<url>%BASE_URL%_thumbs/</url>
+		<directory>%BASE_DIR%_thumbs</directory>
+		<directAccess>false</directAccess>
+		<maxWidth>320</maxWidth>
+		<maxHeight>240</maxHeight>
+		<quality>80</quality>
+	</thumbs>
+	<plugins>
+		<plugin>
+			<name>imageresize</name>
+			<class>com.ckfinder.connector.plugins.ImageResize</class>
+			<params>
+				<param name="smallThumb" value="90x90"></param>
+				<param name="mediumThumb" value="120x120"></param>
+				<param name="largeThumb" value="180x180"></param>
+			</params>
+		</plugin>
+		<plugin>
+			<name>fileeditor</name>
+			<class>com.ckfinder.connector.plugins.FileEditor</class>
+			<params></params>
+		</plugin>
+	</plugins>
+	<basePathBuilderImpl>com.ckfinder.connector.configuration.ConfigurationPathBuilder</basePathBuilderImpl>
+</config>

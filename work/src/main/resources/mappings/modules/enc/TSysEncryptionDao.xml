@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.enc.dao.TSysEncryptionDao">
+    
+	<sql id="tSysEncryptionColumns">
+		a.name AS "name",
+		a.type AS "type",
+		a.obj AS "obj",
+		a.key AS "key",
+		a.token AS "token"
+	</sql>
+	
+	<sql id="tSysEncryptionJoins">
+	</sql>
+    
+	<select id="get" resultType="TSysEncryption">
+		SELECT 
+			<include refid="tSysEncryptionColumns"/>
+		FROM t_sys_encryption a
+		<include refid="tSysEncryptionJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="TSysEncryption">
+		SELECT 
+			<include refid="tSysEncryptionColumns"/>
+		FROM t_sys_encryption a
+		<include refid="tSysEncryptionJoins"/>
+		<where>
+			
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="TSysEncryption">
+		SELECT 
+			<include refid="tSysEncryptionColumns"/>
+		FROM t_sys_encryption a
+		<include refid="tSysEncryptionJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_sys_encryption(
+			name,
+			type,
+			obj,
+			key,
+			token
+		) VALUES (
+			#{name},
+			#{type},
+			#{obj},
+			#{key},
+			#{token}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_sys_encryption SET 	
+			name = #{name},
+			type = #{type},
+			obj = #{obj},
+			key = #{key},
+			token = #{token}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM t_sys_encryption
+		WHERE id = #{id}
+	</update>
+	
+		<update id="batchDelete">
+			DELETE FROM t_sys_encryption
+			WHERE id in
+				<foreach collection="ids" index="index" item="id" open="(" separator="," close=")">   
+					#{id}  
+				</foreach>  
+	</update>
+</mapper>

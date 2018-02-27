@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+html {height:100%}
+
+body {margin:0px; padding:0px;font-family:"微软雅黑",Arial; font-size:14px; color:#000;line-height:26px}
+
+div,ul,li,p,h1,h2,h3,span{ margin:0px; padding:0px; list-style:none;font-family:"微软雅黑",Arial;text-decoration:none;vertical-align:middle; font-size:14px;}
+
+img { border:0px; vertical-align:middle}
+
+a { color:#000;text-decoration:none}
+
+.bottom {border-top:3px solid #1574b8; background:#eee; line-height:26px;height:105px; width:100%; margin-top:15px}
+
+.bq {text-align:center;margin-top:25px;}
+

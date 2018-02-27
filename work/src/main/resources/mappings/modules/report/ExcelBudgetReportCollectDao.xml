@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.report.dao.ExcelBudgetReportCollectDao">
+    
+	<sql id="excelBudgetReportCollectColumns">
+		a.id AS "id",
+		a.office_id AS "office.id",
+		a.budget_id AS "excelBudgetReport.id",
+		e3.name AS "excelBudgetReport.name",
+		e3.over_timo AS "excelBudgetReport.overTimo",
+		e3.is_over AS "excelBudgetReport.isOver",
+		a.sumit_user AS "sumitUser",
+		a.status AS "status",
+		a.xml AS "xml",
+		a.update_date AS "updateDate",
+		o2.name AS "office.name"
+	</sql>
+	
+	<sql id="excelBudgetReportCollectJoins">
+		LEFT JOIN sys_office o2 ON o2.id = a.office_id
+		LEFT JOIN excel_budget_report e3 ON e3.id = a.budget_id
+	</sql>
+    
+	<select id="get" resultType="ExcelBudgetReportCollect">
+		SELECT 
+			<include refid="excelBudgetReportCollectColumns"/>
+		FROM excel_budget_report_collect a
+		<include refid="excelBudgetReportCollectJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ExcelBudgetReportCollect">
+		SELECT 
+			<include refid="excelBudgetReportCollectColumns"/>
+		FROM excel_budget_report_collect a
+		<include refid="excelBudgetReportCollectJoins"/>
+		<where>
+			<if test="excelBudgetReport != null and excelBudgetReport.id != null and excelBudgetReport.id != ''">
+				AND a.budget_id = #{excelBudgetReport.id}
+			</if>
+			<if test="status != null and status != ''">
+				AND a.status = #{status}
+			</if>
+			<if test="beginUpdateDate != null and endUpdateDate != null and beginUpdateDate != '' and endUpdateDate != ''">
+				AND a.update_date BETWEEN #{beginUpdateDate} AND #{endUpdateDate}
+			</if>
+			<if test="officeid != null and officeid != null and officeid != '' and officeid != ''">
+				AND a.office_id IN (SELECT id FROM sys_office where parent_id = #{officeid} OR id = #{officeid})
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="ExcelBudgetReportCollect">
+		SELECT 
+			<include refid="excelBudgetReportCollectColumns"/>
+		FROM excel_budget_report_collect a
+		<include refid="excelBudgetReportCollectJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO excel_budget_report_collect(
+			id,
+			office_id,
+			budget_id,
+			sumit_user,
+			status,
+			xml,
+			update_date
+		) VALUES (
+			#{id},
+			#{office.id},
+			#{excelBudgetReport.id},
+			#{sumitUser},
+			#{status},
+			#{xml},
+			#{updateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE excel_budget_report_collect SET 	
+			office_id = #{office.id},
+			budget_id = #{excelBudgetReport.id},
+			sumit_user = #{sumitUser},
+			status = #{status},
+			xml = #{xml},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="saveXml">
+		UPDATE excel_budget_report_collect SET 	
+			xml = #{xml},
+			status = #{status},
+			sumit_user = #{sumitUser},
+			update_date = #{updateDate}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<update id="delete">
+		DELETE FROM excel_budget_report_collect
+		WHERE id = #{id}
+	</update>
+	<update id="deleteByBugetId">
+		DELETE FROM excel_budget_report_collect 
+		WHERE budget_id = #{id}
+	</update>
+	<update id="updateStatus">
+		UPDATE excel_budget_report_collect SET 
+			status = 	 #{status}
+		WHERE id = #{id}
+	</update>
+	<select id="getXmlById" resultType="String">
+		SELECT xml
+		FROM excel_budget_report_collect 
+		WHERE id = #{id}
+	</select>
+	
+	<update id="batchDeleteByBugetIds">
+		DELETE FROM excel_budget_report_collect
+		where budget_id in
+		<foreach collection="ids" index="index" item="id" open="(" separator="," close=")">   
+       		#{id}   
+    	</foreach>  
+	</update>
+	
+	<select id="findListOfCheckStatusByBugetIds" resultType="Integer">
+		SELECT count(*)
+		FROM excel_budget_report_collect a
+		<include refid="excelBudgetReportCollectJoins"/>
+		where a.status = '1' and e3.id IN  
+		<foreach collection="ids" index="index" item="id" open="(" separator="," close=")">   
+       		#{id}   
+    	</foreach> 
+	</select>
+
+	<select id="getSummaryData" parameterType="String" resultType="ExcelBudgetReportCollect">
+		SELECT
+		<include refid="excelBudgetReportCollectColumns"/>
+		FROM excel_budget_report_collect a
+		<include refid="excelBudgetReportCollectJoins"/>
+		WHERE a.BUDGET_ID = #{excelId} AND a.STATUS=1
+	</select>
+	<!--获取任务完成进度-->
+	<select id="getTaskProgress" parameterType="String" resultType="String">
+		SELECT
+			CONCAT(
+				FORMAT((completeTask / sumTask) * 100, 2),
+				'%'
+			) AS progress
+		FROM
+			(
+				SELECT
+					count(*) AS sumTask,
+					BUDGET_ID
+				FROM
+					excel_budget_report_collect
+				WHERE
+					BUDGET_ID = #{id}
+			) ST,
+			(
+				SELECT
+					count(*) AS completeTask
+				FROM
+					excel_budget_report_collect
+				WHERE
+					BUDGET_ID = #{id}
+				AND `STATUS` = 1
+			) CT
+	</select>
+	<!--获取主任务报表-->
+	<select id="getParentExcel" parameterType="String" resultType="String">
+		select P.EXCLE FROM excel_budget_report_collect C
+		LEFT JOIN excel_budget_report P ON C.BUDGET_ID=P.ID
+		WHERE C.ID=#{id}
+	</select>
+
+	<!--获得任务下未上报的子任务-->
+	<select id="getNotUploadTask" parameterType="String" resultType="ExcelBudgetReportCollect">
+		SELECT
+			o.ID as "office.id",
+			o.NAME as "office.name",
+			o.EMAIL as "office.email",
+			pu.ID as "office.primaryPerson.id",
+			pu.NAME as "office.primaryPerson.name",
+			pu.EMAIL as "office.primaryPerson.email",
+			du.ID as "office.deputyPerson.id",
+			du.NAME as "office.deputyPerson.name",
+			du.EMAIL as "office.deputyPerson.email",
+			a.ID as "id",
+			a.STATUS as "statuts",
+			a.XML as "xml"
+		FROM
+			excel_budget_report_collect a
+		LEFT JOIN sys_office o ON o.ID=a.OFFICE_ID
+		LEFT JOIN sys_user pu on pu.ID=o.PRIMARY_PERSON
+		LEFT JOIN sys_user du ON du.ID=o.DEPUTY_PERSON
+		WHERE
+			a.STATUS=0
+		AND
+			a.BUDGET_ID=#{id}
+
+	</select>
+
+	<!--根据部门id查询填报任务-->
+	<select id="getCollectByOffice" parameterType="String" resultType="ExcelBudgetReportCollect">
+		select
+			<include refid="excelBudgetReportCollectColumns"/>
+		from
+			excel_budget_report_collect a
+			<include refid="excelBudgetReportCollectJoins"/>
+		where
+			a.OFFICE_ID=#{officeId}
+		order by a.UPDATE_DATE desc
+	</select>
+</mapper>

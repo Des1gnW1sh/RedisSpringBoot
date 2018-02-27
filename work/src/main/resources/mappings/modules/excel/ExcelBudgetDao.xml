@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.excel.dao.ExcelBudgetDao">
+    
+	<sql id="excelBudgetColumns">
+		a.id AS "id",
+		a.name AS "name",
+		<!-- a.excle_xml AS "excleXml", -->
+		
+		a.excle_model_id AS "excleModel.id",
+		a1.name AS "excleModel.name",
+		
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.IS_OVER AS "isOver",
+		a.OFFICE_LAB AS "officeLab",
+		a.OFFICE_LABNAME AS "officeLabName"
+	</sql>
+	
+	<sql id="excelBudgetJoins">
+		LEFT JOIN excel_model a1 ON a1.id = a.excle_model_id	
+	</sql>
+    
+	<select id="get" resultType="ExcelBudget">
+		SELECT 
+			<include refid="excelBudgetColumns"/>
+		FROM excel_budget a
+		<include refid="excelBudgetJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="getModelXmlById" resultType="String">
+		SELECT a1.xml
+		FROM excel_budget a
+		<include refid="excelBudgetJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="getXmlById" resultType="String">
+		SELECT excle_xml
+		FROM excel_budget 
+		WHERE id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ExcelBudget">
+		SELECT 
+			<include refid="excelBudgetColumns"/>
+		FROM excel_budget a
+		<include refid="excelBudgetJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="excleModel != null and excleModel.id != null and excleModel.id != ''">
+				AND a.excle_model_id = #{excleModel.id}
+			</if>
+			<if test="excleModel != null and excleModel.name != null and excleModel.name != ''">
+				AND a1.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{excleModel.name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{excleModel.name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{excleModel.name},'%')</if>
+			</if>
+			<if test="isOver != null and isOver !=''">
+				and a.IS_OVER = #{isOver}
+			</if>			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getByName" resultType="ExcelBudget">
+		SELECT
+			<include refid="excelBudgetColumns"/>
+		FROM excel_budget a
+		<include refid="excelBudgetJoins"/>
+		WHERE a.name = #{name} AND a.del_flag = #{DEL_FLAG_NORMAL}
+	</select> 
+	
+	<select id="findAllList" resultType="ExcelBudget">
+		SELECT 
+			<include refid="excelBudgetColumns"/>
+		FROM excel_budget a
+		<include refid="excelBudgetJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO excel_budget(
+			id,
+			name,
+			excle_xml,
+			excle_model_id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag,
+			OFFICE_LAB,
+			OFFICE_LABNAME
+		) VALUES (
+			#{id},
+			#{name},
+			#{excleXml},
+			#{excleModel.id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag},
+			#{officeLab},
+			#{officeLabName}
+		)
+	</insert>
+	<update id="saveXml">
+		UPDATE excel_budget SET 	
+			excle_xml = #{excleXml}
+		WHERE id = #{id}
+	</update>
+	<update id="updateIsOver">
+		UPDATE excel_budget SET 	
+			IS_OVER = #{isOver}
+		WHERE id = #{id}
+	</update>
+	<update id="update">
+		UPDATE excel_budget SET 	
+			name = #{name},
+			excle_xml = #{excleXml},
+			excle_model_id = #{excleModel.id},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks},
+			OFFICE_LAB = #{officeLab},
+			IS_OVER = #{isOver},
+			OFFICE_LABNAME = #{officeLabName}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE excel_budget SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

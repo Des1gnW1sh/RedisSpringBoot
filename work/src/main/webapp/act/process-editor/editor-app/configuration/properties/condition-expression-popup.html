@@ -1,0 +1,133 @@
+<div class="modal" ng-controller="KisBpmConditionExpressionPopupCtrl">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="close()">&times;</button>
+    <h2 translate>PROPERTY.SEQUENCEFLOW.CONDITION.TITLE</h2>
+</div>
+<meta charset="utf-8">
+<div class="modal-body">
+
+    <div class="detail-group clearfix">
+        
+        <div class="form-group clearfix">
+            <div class="col-xs-12">
+                <label class="col-xs-3">{{'PROPERTY.SEQUENCEFLOW.CONDITION.STATIC' | translate}}</label>
+                <div class="col-xs-9">
+                	<input id="cc" name="dept">
+                    <br/>
+                    <input id="symbol" name="symbol" style="display:none">
+                    <input id="symbolRed" style="display:none;color:red" value="*必须选择"/>
+                    <br/>
+                    <input id="value" name="value" style="display:none" class="easyui-validatebox">
+                    <input id="valueRed" style="display:none;color:red" value="*必须填写"/>
+                    <br/>
+                   	<a href="#" class="easyui-linkbutton" onclick="sc();">生成判断条件</a>
+                    <textarea id='expression' class="form-control" ng-model="conditionExpression.value" style="width:90%; height:100%; max-width: 100%; max-height: 100%; min-height: 100px"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button ng-click="close()" class="btn btn-primary" translate>ACTION.CANCEL</button>
+        <button ng-click="save()" class="btn btn-primary" translate>ACTION.SAVE</button>
+    </div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="editor-app/easyUi/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="editor-app/easyUi/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="editor-app/easyUi/demo.css">
+<script src="editor-app/easyUi/jquery.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+	//路径
+	var url = window.location.href
+	//调用的路径
+	var tou = url.substring(url.indexOf("url=")+4,url.lastIndexOf("&"));
+	//modelId
+	var modelId = url.substring(url.indexOf("modelId=")+8);
+	//已经被选择的值
+	var valueNow = angular.element('#expression').scope().conditionExpression.value
+	//值
+	var ccValue = valueNow.substring(valueNow.indexOf("${")+2,valueNow.indexOf("}"));
+	var symbolValue;
+	var valueValue;
+	if(ccValue!='agree'&&ccValue!='refuse'){
+		valueValue  =  valueNow.substring(valueNow.indexOf("}")+2);
+		if(valueValue.indexOf("=")>=0){
+			symbolValue= valueNow.substring(valueNow.indexOf("}")+1,valueNow.indexOf("}")+3);
+			valueValue  =  valueNow.substring(valueNow.indexOf("}")+3);
+			console.log(valueValue)
+		}else{
+			symbolValue= valueNow.substring(valueNow.indexOf("}")+1,valueNow.indexOf("}")+2);
+		}
+	}
+	$('#symbol').combobox({
+		url:tou+'/a/act/model/getUniversalSymbol?symbolValue='+symbolValue,
+		valueField:'id',
+		textField:'text',
+		onSelect:function(record1){
+			$("#value").show();
+		}
+	})
+	$('#symbol').next(".combo").hide();
+	if(symbolValue!=''){
+		$('#symbol').next(".combo").show();
+	}
+	if(valueValue!=''){
+		$("#value").val(valueValue);
+		$("#value").show();
+	}
+	$('#cc').combobox({
+			url:tou+'/a/act/model/getTypeColumn?modelId='+modelId+'&ccValue='+ccValue,
+			valueField:'id',
+			textField:'text',
+			onSelect:function(record){
+				$("#symbol").hide();
+				$("#value").hide();
+				$("#symbolRed").hide();
+				$("#valueRed").hide();
+				$('#symbol').next(".combo").hide();
+				var id = record.id
+				if(id!='agree'&&id!='refuse'){
+					$('#symbol').next(".combo").show();
+				}
+			}
+		});
+})
+function sc(){
+	var colum = $('#cc').combobox('getValue')
+	var symbol
+	var value
+	if(colum!='agree'&&colum!='refuse'&&colum!=' '){
+		symbol = $('#symbol').combobox('getValue')
+		if(symbol==''){
+			$("#symbolRed").show();
+			return;
+		}else{
+			$("#symbolRed").hide();
+		}
+		value = $('#value').val();
+		if(value==''){
+			$("#valueRed").show();
+			return;
+		}else{
+			$("#valueRed").hide();
+		}
+	}else{
+		symbol = '=='
+		if(colum=='agree'){
+			value = 0
+		}
+		if(colum=='refuse'){
+			colum = 'agree'
+			value = 1	
+		}
+	}
+	var zcyk = '${'+colum+symbol+value+'}'
+	angular.element('#expression').scope().conditionExpression.value = zcyk
+}
+</script>
+<script src="editor-app/easyUi/jquery.easyui.min.js"></script>

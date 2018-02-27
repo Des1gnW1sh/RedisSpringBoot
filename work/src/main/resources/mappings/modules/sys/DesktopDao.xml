@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.sys.dao.DesktopDao">
+	<!--各部门本月填报数量-->
+	<select id="getThisMonthCountByDepart" resultType="Integer">
+		SELECT
+			count(*) AS num
+		FROM
+			excel_budget_report_collect RC
+		WHERE
+			DATE_FORMAT(RC.UPDATE_DATE,'%Y-%m')=DATE_FORMAT(NOW(),'%Y-%m')
+		AND
+			RC.STATUS=1;
+	</select>
+
+	<!--统计所有部门的填报数量-->
+	<select id="getAllReportCountByDepart" resultType="Integer">
+		SELECT
+			COUNT(*) AS num
+		FROM
+			excel_budget_report_collect RC
+		WHERE
+			RC.STATUS=1
+	</select>
+
+	<!--统计当前时间点正在运行中的任务数量-->
+	<select id="getRunningTaskCountByNow" resultType="Integer">
+		SELECT
+			count(*) AS num
+		FROM
+			excel_budget_report R
+		WHERE
+			R.OVER_TIMO > NOW()
+		AND
+			R.IS_OVER=0
+	</select>
+
+	<!--根据结束时间点，统计近三天会结束的填报任务-->
+	<select id="getWillOverTaskByOverDate" resultType="Integer">
+		SELECT
+			count(*) AS num
+		FROM
+			excel_budget_report R
+		WHERE
+			DATE_FORMAT(R.OVER_TIMO,'%Y-%m-%d') &lt;= date_add(DATE_FORMAT(NOW(),'%Y-%m-%d'), interval 3 day)
+		AND
+			DATE_FORMAT(R.OVER_TIMO,'%Y-%m-%d') >= DATE_FORMAT(NOW(),'%Y-%m-%d')
+	</select>
+
+	<!--统计每月任务数量-->
+	<select id="getEveryMonthTaskNum" resultType="java.util.Map">
+		SELECT
+			count(*) as num,
+			DATE_FORMAT(CREATE_DATE,'%Y-%m') as date
+		FROM
+			excel_budget_report
+		GROUP BY
+			DATE_FORMAT(CREATE_DATE,'%Y-%m')
+	</select>
+
+	<!--统计收集任务和汇总任务的比例-->
+	<select id="getTaskCountByTaskType" resultType="java.util.Map">
+		select
+			count(*) as num,
+			(case
+			   when TASK_TYPE=0
+			   then '收集任务'
+			   when TASK_TYPE=1
+			   then '汇总任务'
+			   else '其它'
+			  end) as taskType
+		FROM
+			excel_budget_report
+		GROUP BY
+			TASK_TYPE
+	</select>
+
+	<!--统计各部门任务填报数量-->
+	<select id="getTaskCountByDepart" resultType="java.util.Map">
+		SELECT
+			count(*) AS num,
+			O.NAME
+		FROM
+			excel_budget_report_collect RC
+		LEFT JOIN sys_office O ON O.ID=RC.OFFICE_ID
+		WHERE
+			RC.`STATUS`=1
+		GROUP BY
+			RC.OFFICE_ID
+	</select>
+
+</mapper>

@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.report.dao.ExcelBudgetReportDao">
+
+    <resultMap id="ReportMap" type="ExcelBudgetReport">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="taskType" property="taskType" jdbcType="INTEGER"/>
+        <result column="officeLab" property="officeLab" jdbcType="VARCHAR"/>
+        <result column="officeLabname" property="officeLabname" jdbcType="VARCHAR"/>
+        <result column="overTimo" property="overTimo" jdbcType="TIMESTAMP"/>
+        <result column="issueFlag" property="issueFlag" jdbcType="CHAR"/>
+        <result column="isOpenEmailWarn" property="isOpenEmailWarn" jdbcType="CHAR"/>
+        <result column="warnTime" property="warnTime" jdbcType="INTEGER"/>
+        <result column="informSchedule" property="informSchedule" jdbcType="CHAR"/>
+        <result column="informUrge" property="informUrge" jdbcType="CHAR"/>
+        <result column="isOver" property="isOver" jdbcType="CHAR"/>
+        <result column="urgeTime" property="urgeTime" jdbcType="DECIMAL"/>
+        <result column="insideFormula" property="insideFormula"/>
+        <result column="outsideFormula" property="outsideFormula"/>
+        <result column="forceFormula" property="forceFormula" jdbcType="CHAR"/>
+        <result column="excle" property="excle" jdbcType="VARCHAR"/>
+        <result column="createBy.id" property="createBy.id" jdbcType="VARCHAR"/>
+        <result column="createDate" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="updateBy.id" property="updateBy.id" jdbcType="VARCHAR"/>
+        <result column="updateDate" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="delFlag" property="delFlag" jdbcType="CHAR"/>
+        <result column="submit" property="submit" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <association property="progress" select="com.scnjwh.intellectreport.modules.report.dao.ExcelBudgetReportCollectDao.getTaskProgress" column="id"/>
+    </resultMap>
+
+    <sql id="excelBudgetReportColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.office_lab AS "officeLab",
+		a.office_labname AS "officeLabname",
+		a.over_timo AS "overTimo",
+		a.issue_flag AS "issueFlag",
+		a.is_open_email_warn AS "isOpenEmailWarn",
+		a.warn_time AS "warnTime",
+		a.task_type AS "taskType",
+		a.inform_schedule AS "informSchedule",
+		a.inform_urge AS "informUrge",
+		a.is_over AS "isOver",
+		a.urge_time AS "urgeTime",
+		a.inside_formula AS "insideFormula",
+		a.outside_formula AS "outsideFormula",
+		a.force_formula AS "forceFormula",
+		a.excle AS "excle",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+		a.submit AS "submit"
+	</sql>
+
+    <sql id="excelBudgetReportJoins">
+
+    </sql>
+
+    <sql id = "excelBudgetReportJoinsListOfMy">
+
+    </sql>
+
+    <select id="get" resultMap="ReportMap">
+        SELECT
+        <include refid="excelBudgetReportColumns"/>
+        FROM excel_budget_report a
+        <include refid="excelBudgetReportJoins"/>
+        WHERE a.id = #{id}
+    </select>
+    <select id="getXmlById" resultType="String">
+		SELECT excle
+		FROM excel_budget_report 
+		WHERE id = #{id}
+	</select>
+
+    <select id="getSubmitById" resultType="String">
+		SELECT submit
+		FROM excel_budget_report 
+		WHERE id = #{id}
+	</select>
+    <select id="findList" resultMap="ReportMap">
+        SELECT
+        <include refid="excelBudgetReportColumns"/>
+        FROM excel_budget_report a
+        <include refid="excelBudgetReportJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+            <if test="userId != null and userId != ''">
+                AND a.create_by = #{userId}
+            </if>
+            <if test="name != null and name != ''">
+                AND a.name LIKE
+                <if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+                <if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+                <if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+            </if>
+            <if test="isOver != null and isOver != ''">
+                AND a.is_over = #{isOver}
+            </if>
+            <if test="beginCreateDate != null and endCreateDate != null and beginCreateDate != '' and endCreateDate != ''">
+                AND a.create_date BETWEEN #{beginCreateDate} AND #{endCreateDate}
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="findListOfOwn" resultMap="ReportMap">
+        SELECT
+        <include refid="excelBudgetReportColumns"/>
+        FROM excel_budget_report a
+        <include refid="excelBudgetReportJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+            <if test="userId != null and userId != ''">
+                AND a.create_by = #{userId}
+            </if>
+            <if test="name != null and name != ''">
+                AND a.name LIKE
+                <if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+                <if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+                <if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+            </if>
+            <if test="isOver != null and isOver != ''">
+                AND a.is_over = #{isOver}
+            </if>
+            <if test="beginCreateDate != null and endCreateDate != null and beginCreateDate != '' and endCreateDate != ''">
+                AND a.create_date BETWEEN #{beginCreateDate} AND #{endCreateDate}
+            </if>
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="findListOfMy" resultMap="ReportMap">
+        SELECT
+        <include refid="excelBudgetReportColumns"/>
+        ,a2.label AS "status"
+        FROM excel_budget_report a
+        <include refid="excelBudgetReportJoinsListOfMy"/>
+         INNER JOIN excel_budget_report_collect a1 ON a1.budget_id = a.id
+         INNER JOIN sys_dict a2 ON a2.value = a1.status
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+            AND
+            <foreach collection="offices" item="office" index="index" open="(" close=")" separator=" or ">
+                a.office_lab like
+                <if test="dbName == 'oracle'">'%'|| #{office.id}||'%'</if>
+                <if test="dbName == 'mssql'">'%'+ #{office.id}+'%'</if>
+                <if test="dbName == 'mysql'">concat('%', #{office.id},'%')</if>
+            </foreach>
+            AND
+            <foreach collection="offices" item="office2" index="index" open="(" close=")" separator=" or ">
+                a1.OFFICE_ID like
+                <if test="dbName == 'oracle'">'%'|| #{office2.id}||'%'</if>
+                <if test="dbName == 'mssql'">'%'+ #{office2.id}+'%'</if>
+                <if test="dbName == 'mysql'">concat('%', #{office2.id},'%')</if>
+            </foreach>
+            <if test="name != null and name != ''">
+                AND a.name LIKE
+                <if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+                <if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+                <if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+            </if>
+            <if test="isOver != null and isOver != ''">
+                AND a.is_over = #{isOver}
+            </if>
+            <if test="beginCreateDate != null and endCreateDate != null and beginCreateDate != '' and endCreateDate != ''">
+                AND a.create_date BETWEEN #{beginCreateDate} AND #{endCreateDate}
+            </if>
+                AND a2.TYPE = 'excel_status'
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="findAllList" resultMap="ReportMap">
+        SELECT
+        <include refid="excelBudgetReportColumns"/>
+        FROM excel_budget_report a
+        <include refid="excelBudgetReportJoins"/>
+        <where>
+            a.del_flag = #{DEL_FLAG_NORMAL}
+        </where>
+        <choose>
+            <when test="page !=null and page.orderBy != null and page.orderBy != ''">
+                ORDER BY ${page.orderBy}
+            </when>
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getNeedEmailReport" resultMap="ReportMap">
+		SELECT
+            R. NAME AS "name",
+            R.office_lab AS "officeLab",
+            R.over_timo AS "overTimo",
+            R.issue_flag AS "issueFlag",
+            R.warn_time AS "warnTime",
+            R.CREATE_DATE AS "createDate"
+        FROM
+            excel_budget_report R
+        WHERE
+            R.DEL_FLAG = 0
+        AND R.OVER_TIMO > now()
+        AND R.IS_OVER = 0
+        AND R.IS_OPEN_EMAIL_WARN = 1
+	</select>
+    
+    <select id="getOfficeLeader" resultType="java.util.Map">
+        select
+          O.NAME AS "officeName",
+          O.EMAIL AS "officeEmail",
+          PU.NAME AS "puName",
+          PU.EMAIL AS "puEmail",
+          DU.NAME AS "duName",
+          DU.EMAIL AS "duEmail"
+        from
+          sys_office O
+        left join sys_user PU on O.primary_person = PU.id
+        left join sys_user DU on O.deputy_person = DU.id
+        where
+          O.id
+         in
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="getBudget" resultType="String">
+       select xml
+       from excel_budget_report_collect
+       where budget_id = #{parentId}
+       AND office_id = #{xmlId}
+       AND status = #{status}
+    </select>
+
+    <select id="getBudgetChild" resultType="java.util.Map">
+        select xml,status
+        from excel_budget_report_collect
+        where budget_id = #{parentId}
+        AND office_id = #{xmlId}
+    </select>
+
+    <select id="getBudgetMB" resultType="java.util.Map">
+        select excle,task_type,submit
+        from excel_budget_report
+        where id = #{id}
+    </select>
+
+    <insert id="insert">
+		INSERT INTO excel_budget_report(
+			id,
+			name,
+			office_lab,
+			office_labname,
+			over_timo,
+			issue_flag,
+			is_open_email_warn,
+			warn_time,
+			TASK_TYPE,
+			inform_schedule,
+			inform_urge,
+			is_over,
+			urge_time,
+			inside_formula,
+			outside_formula,
+			force_formula,
+			excle,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{name},
+			#{officeLab},
+			#{officeLabname},
+			#{overTimo},
+			#{issueFlag},
+			#{isOpenEmailWarn},
+			#{warnTime},
+			#{taskType},
+			#{informSchedule},
+			#{informUrge},
+			#{isOver},
+			#{urgeTime},
+			#{insideFormula},
+			#{outsideFormula},
+			#{forceFormula},
+			#{excle},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE excel_budget_report SET 	
+			name = #{name},
+			office_lab = #{officeLab},
+			office_labname = #{officeLabname},
+			over_timo = #{overTimo},
+			issue_flag = #{issueFlag},
+			is_open_email_warn=#{isOpenEmailWarn},
+			warn_time=#{warnTime},
+			TASK_TYPE=#{taskType},
+			inform_schedule = #{informSchedule},
+			inform_urge = #{informUrge},
+			is_over = #{isOver},
+			urge_time = #{urgeTime},
+			inside_formula = #{insideFormula},
+			outside_formula = #{outsideFormula},
+			force_formula = #{forceFormula},
+			excle = #{excle},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+		UPDATE excel_budget_report SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+
+
+    <update id="saveSubmit">
+		UPDATE excel_budget_report SET 	
+			submit = #{submit}
+		WHERE id = #{id}
+	</update>
+    <update id="updateIsOver">
+		UPDATE excel_budget_report SET 	
+			IS_OVER = #{isOver}
+		WHERE id = #{id}
+	</update>
+
+    <update id="batchDelete" parameterType="String">
+        UPDATE excel_budget_report SET
+        del_flag = '1'
+        WHERE id IN
+        <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+    <!--获得已结束任务-->
+    <select id="getFinishedTask" resultType="ExcelBudgetReport">
+        SELECT
+          <include refid="excelBudgetReportColumns"/>
+        FROM
+          excel_budget_report a
+        WHERE
+          a.OVER_TIMO &lt; now()
+        AND
+          a.IS_OVER=0
+        AND
+          a.FINISH_EMAIL IS NULL
+    </select>
+
+    <!--设置子任务为已发送结束邮件-->
+    <update id="setFinishEmail" parameterType="String">
+        UPDATE excel_budget_report SET FINISH_EMAIL=1 WHERE ID=#{id}
+    </update>
+</mapper>

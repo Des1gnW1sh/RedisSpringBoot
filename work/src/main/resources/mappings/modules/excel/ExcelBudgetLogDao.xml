@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scnjwh.intellectreport.modules.excel.dao.ExcelBudgetLogDao">
+    
+	<sql id="excelBudgetLogColumns">
+		a.id AS "id",
+		a.content AS "content",
+		a.create_by AS "createBy.id",
+		u1.name AS "createBy.name",
+		a.create_date AS "createDate",
+		a.budget_id AS "budget.id",
+		a1.name AS "budget.name"
+	</sql>
+	
+	<sql id="excelBudgetLogJoins">
+		LEFT JOIN excel_budget a1 on a1.id = a.budget_id
+		LEFT JOIN sys_user u1 ON u1.id = a.create_by
+	</sql>
+    
+	<select id="get" resultType="ExcelBudgetLog">
+		SELECT 
+			<include refid="excelBudgetLogColumns"/>
+		FROM excel_budget_log a
+		<include refid="excelBudgetLogJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="ExcelBudgetLog">
+		SELECT 
+			<include refid="excelBudgetLogColumns"/>
+		FROM excel_budget_log a
+		<include refid="excelBudgetLogJoins"/>
+		<where>
+			<if test="beginCreateDate != null and endCreateDate != null and beginCreateDate != '' and endCreateDate != ''">
+				AND a.create_date BETWEEN #{beginCreateDate} AND #{endCreateDate}
+			</if>
+			<if test="budget != null and budget.id != null and budget.id != ''">
+				AND a.budget_id = #{budget.id}
+			</if>
+			<if test="budget != null and budget.name != null and budget.name != ''">
+				AND a1.name = #{budget.name}
+			</if>
+		</where>
+		ORDER BY a.create_date desc
+		<!-- <choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose> -->
+	</select>
+	
+	<select id="findAllList" resultType="ExcelBudgetLog">
+		SELECT 
+			<include refid="excelBudgetLogColumns"/>
+		FROM excel_budget_log a
+		<include refid="excelBudgetLogJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO excel_budget_log(
+			id,
+			content,
+			create_by,
+			create_date,
+			budget_id
+		) VALUES (
+			#{id},
+			#{content},
+			#{createBy.id},
+			#{createDate},
+			#{budget.id}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE excel_budget_log SET 	
+			content = #{content},
+			budget_id = #{budget.id}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM excel_budget_log
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
